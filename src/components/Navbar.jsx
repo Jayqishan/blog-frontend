@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import ConfirmDialog from './ConfirmDialog';
@@ -7,6 +7,7 @@ export default function Navbar() {
   const { currentUser, logout, deleteAccount, notificationCount, showToast } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
+  const headerRef = useRef(null);
   const [query, setQuery] = useState('');
   const [adminMode, setAdminMode] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -29,6 +30,28 @@ export default function Navbar() {
     window.addEventListener('keydown', handleKeydown);
     return () => window.removeEventListener('keydown', handleKeydown);
   }, []);
+
+  useEffect(() => {
+    const headerNode = headerRef.current;
+    if (!headerNode) return undefined;
+
+    const setHeaderOffset = () => {
+      const headerHeight = Math.ceil(headerNode.getBoundingClientRect().height);
+      document.documentElement.style.setProperty('--header-offset', `${headerHeight + 28}px`);
+    };
+
+    setHeaderOffset();
+
+    const resizeObserver = new ResizeObserver(setHeaderOffset);
+    resizeObserver.observe(headerNode);
+    window.addEventListener('resize', setHeaderOffset);
+
+    return () => {
+      resizeObserver.disconnect();
+      window.removeEventListener('resize', setHeaderOffset);
+      document.documentElement.style.removeProperty('--header-offset');
+    };
+  }, [currentUser]);
 
   function handleLogout() {
     setMenuOpen(false);
@@ -59,7 +82,7 @@ export default function Navbar() {
 
   return (
     <>
-      <header className="header glass-panel">
+      <header ref={headerRef} className="header glass-panel">
         <div className="header-inner">
           <Link className="logo" to="/">
             <span className="logo-icon">✦</span>
