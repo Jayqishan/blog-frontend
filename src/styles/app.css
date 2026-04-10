@@ -1492,13 +1492,14 @@ input[type="file"].react-field::file-selector-button, input[type="file"].field::
   }
   .main {
     width: min(1240px, calc(100% - 16px));
-    padding-top: 162px;
+    padding-top: 148px;
+    padding-bottom: 72px;
   }
   .hero {
-    margin-bottom: 28px;
+    margin-bottom: 22px;
   }
   .hero-editorial {
-    gap: 18px;
+    gap: 14px;
     padding: 20px;
     border-radius: 28px;
   }
@@ -1512,17 +1513,19 @@ input[type="file"].react-field::file-selector-button, input[type="file"].field::
   }
   .hero-title,
   .hero-title--compact {
-    margin: 14px 0 12px;
+    margin: 12px 0 10px;
     font-size: clamp(31px, 10.5vw, 42px);
     line-height: 0.98;
   }
   .hero-sub,
   .auth-copy {
     font-size: 15px;
-    line-height: 1.7;
+    line-height: 1.68;
+    margin: 0;
   }
   .hero-cta {
     gap: 10px;
+    margin-top: 14px;
   }
   .btn-publish,
   .btn-secondary {
@@ -1533,6 +1536,25 @@ input[type="file"].react-field::file-selector-button, input[type="file"].field::
   .hero-compose {
     padding: 18px;
     border-radius: 24px;
+  }
+  .hero-compose-copy {
+    margin: 10px 0 16px;
+  }
+  .hero-compose-locked {
+    gap: 12px;
+  }
+  .section {
+    margin-bottom: 30px;
+  }
+  .section-label {
+    margin-bottom: 14px;
+  }
+  .feed-header {
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+  .results-meta--feed {
+    margin-bottom: 16px;
   }
   .react-field,
   .field {
@@ -1573,23 +1595,52 @@ input[type="file"].react-field::file-selector-button, input[type="file"].field::
   }
   .main {
     width: calc(100% - 12px);
-    padding-top: 156px;
+    padding-top: 140px;
+    padding-bottom: 64px;
   }
   .hero-editorial {
-    padding: 18px 16px;
-    gap: 16px;
+    padding: 16px 16px 18px;
+    gap: 12px;
     border-radius: 24px;
+  }
+  .hero-tag {
+    margin-bottom: 2px;
   }
   .hero-title,
   .hero-title--compact {
+    margin: 10px 0 8px;
     font-size: clamp(28px, 10vw, 36px);
   }
   .hero-sub,
   .auth-copy {
     font-size: 14px;
     line-height: 1.65;
+    margin: 0;
+  }
+  .hero-cta {
+    margin-top: 12px;
+    gap: 8px;
+  }
+  .btn-publish,
+  .btn-secondary {
+    min-height: 54px;
   }
   .hero-compose {
     padding: 16px;
+  }
+  .hero-compose-copy {
+    margin: 8px 0 14px;
+  }
+  .hero-compose-locked {
+    gap: 10px;
+  }
+  .section {
+    margin-bottom: 24px;
+  }
+  .feed-header {
+    margin-bottom: 10px;
+  }
+  .results-meta--feed {
+    margin-bottom: 14px;
   }
 }
