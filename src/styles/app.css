@@ -1104,7 +1104,6 @@ input[type="file"].react-field::file-selector-button, input[type="file"].field::
 ═══════════════════════════════════════════════════════════════ */
 
 .ai-panel {
-  display: none !important;
   margin-top: 12px;
   border-radius: var(--radius-sm);
   overflow: hidden;

@@ -120,5 +120,5 @@ function getMockResponse(prompt) {
   if (prompt.includes('tags/keywords')) {
     return `writing, blogging, creativity, storytelling, ideas`;
   }
-  return 'Demo mode active. Add VITE_GEMINI_API_KEY to your .env file for live AI.';
+  return 'AI suggestion is not available for this input yet.';
 }
