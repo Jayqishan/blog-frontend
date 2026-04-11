@@ -1,7 +1,5 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
-import { toast } from 'react-toastify';
-import AIAssistPanel from '../components/AIAssistPanel';
 import AuthPromptDialog from '../components/AuthPromptDialog';
 import ConfirmDialog from '../components/ConfirmDialog';
 import FormInput from '../components/FormInput';
@@ -160,27 +158,6 @@ export default function HomePage() {
     }
   }
 
-  // ── AI handlers for the create form ─────────────────────────────────────────
-  function handleAiTitle(suggested) {
-    setDraft((prev) => ({ ...prev, title: suggested }));
-    toast.success('✏️ Title applied!');
-  }
-  function handleAiSummary(summary) {
-    setDraft((prev) => ({ ...prev, summary }));
-    toast.success('📝 Summary saved!');
-  }
-  function handleAiTags(tags) {
-    setDraft((prev) => ({ ...prev, tags }));
-    toast.success(`🏷️ ${tags.length} tags applied!`);
-  }
-  function handleAiInsert(idea) {
-    setDraft((prev) => ({
-      ...prev,
-      body: prev.body ? `${prev.body}\n\n${idea}` : idea,
-    }));
-    toast.success('💡 Idea added to your story!');
-  }
-
   return (
     <>
       {/* ── Hero ── */}
@@ -254,50 +231,6 @@ export default function HomePage() {
                 value={draft.body}
                 onChange={(e) => setDraft((prev) => ({ ...prev, body: e.target.value }))}
               />
-
-              {/* ✦ AI Assistant Panel */}
-              <AIAssistPanel
-                title={draft.title}
-                body={draft.body}
-                onUseTitle={handleAiTitle}
-                onUseSummary={handleAiSummary}
-                onUseTags={handleAiTags}
-                onInsertContent={handleAiInsert}
-              />
-
-              {/* Summary preview */}
-              {draft.summary ? (
-                <div className="ai-summary-preview glass-panel">
-                  <p className="ai-summary-label">📝 AI Summary</p>
-                  <p className="ai-summary-text">{draft.summary}</p>
-                  <button
-                    type="button"
-                    className="btn-secondary"
-                    onClick={() => setDraft((prev) => ({ ...prev, summary: '' }))}
-                  >
-                    Remove
-                  </button>
-                </div>
-              ) : null}
-
-              {/* Tags preview */}
-              {draft.tags.length > 0 ? (
-                <div className="ai-tags-preview">
-                  <p className="ai-summary-label">🏷️ Tags</p>
-                  <div className="ai-tags-row">
-                    {draft.tags.map((tag, i) => (
-                      <span key={i} className="ai-tag-chip ai-tag-chip--static">#{tag}</span>
-                    ))}
-                    <button
-                      type="button"
-                      className="btn-secondary"
-                      onClick={() => setDraft((prev) => ({ ...prev, tags: [] }))}
-                    >
-                      Clear
-                    </button>
-                  </div>
-                </div>
-              ) : null}
 
               <div className="create-footer">
                 {draftError

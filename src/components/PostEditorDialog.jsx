@@ -1,6 +1,4 @@
 import { useEffect, useState } from 'react';
-import { toast } from 'react-toastify';
-import AIAssistPanel from './AIAssistPanel';
 import FormInput from './FormInput';
 
 export default function PostEditorDialog({
@@ -47,30 +45,6 @@ export default function PostEditorDialog({
       imageUrl: keepExistingImage,
     });
     if (ok) onClose();
-  }
-
-  // ── AI handlers ─────────────────────────────────────────────────────────────
-  function handleUseTitle(suggested) {
-    setForm((prev) => ({ ...prev, title: suggested }));
-    toast.success('✏️ Title applied!');
-  }
-
-  function handleUseSummary(summary) {
-    setForm((prev) => ({ ...prev, summary }));
-    toast.success('📝 Summary saved!');
-  }
-
-  function handleUseTags(tags) {
-    setForm((prev) => ({ ...prev, tags }));
-    toast.success(`🏷️ ${tags.length} tags applied!`);
-  }
-
-  function handleInsertContent(idea) {
-    setForm((prev) => ({
-      ...prev,
-      body: prev.body ? `${prev.body}\n\n${idea}` : idea,
-    }));
-    toast.success('💡 Idea added to your story!');
   }
 
   return (
@@ -147,52 +121,6 @@ export default function PostEditorDialog({
             onChange={(event) => setForm((prev) => ({ ...prev, body: event.target.value }))}
             placeholder="Share your thoughts..."
           />
-
-          {/* AI Panel */}
-          <AIAssistPanel
-            title={form.title}
-            body={form.body}
-            onUseTitle={handleUseTitle}
-            onUseSummary={handleUseSummary}
-            onUseTags={handleUseTags}
-            onInsertContent={handleInsertContent}
-          />
-
-          {/* Summary (populated by AI or manually typed) */}
-          {form.summary ? (
-            <div className="ai-summary-preview glass-panel">
-              <p className="ai-summary-label">📝 AI Summary</p>
-              <p className="ai-summary-text">{form.summary}</p>
-              <button
-                type="button"
-                className="btn-secondary"
-                onClick={() => setForm((prev) => ({ ...prev, summary: '' }))}
-              >
-                Remove
-              </button>
-            </div>
-          ) : null}
-
-          {/* Tags (populated by AI) */}
-          {form.tags.length > 0 ? (
-            <div className="ai-tags-preview">
-              <p className="ai-summary-label">🏷️ Tags</p>
-              <div className="ai-tags-row">
-                {form.tags.map((tag, i) => (
-                  <span key={i} className="ai-tag-chip ai-tag-chip--static">
-                    #{tag}
-                  </span>
-                ))}
-                <button
-                  type="button"
-                  className="btn-secondary"
-                  onClick={() => setForm((prev) => ({ ...prev, tags: [] }))}
-                >
-                  Clear
-                </button>
-              </div>
-            </div>
-          ) : null}
 
           {error ? <p className="inline-error">{error}</p> : null}
 
