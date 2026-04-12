@@ -1038,8 +1038,18 @@ input[type="file"].react-field::file-selector-button, input[type="file"].field::
   box-shadow: inset 0 0 0 1px rgba(128, 0, 0, 0.08);
 }
 .admin-panel-body { overflow-x: auto; padding: 18px 20px 22px; }
-.admin-table { width: 100%; border-collapse: separate; border-spacing: 0 10px; }
-.admin-table th, .admin-table td { text-align: left; padding: 14px 12px; }
+.admin-table {
+  width: 100%;
+  min-width: 760px;
+  border-collapse: separate;
+  border-spacing: 0 10px;
+}
+.admin-table th, .admin-table td {
+  text-align: left;
+  padding: 14px 12px;
+  vertical-align: middle;
+  white-space: nowrap;
+}
 .admin-table th {
   color: var(--text-faint);
   font-size: 11px;
